@@ -6,6 +6,8 @@ import confLogo from "../images/badge-header.svg"
 
 class Badge extends React.Component {
 	render() {
+		const {firstName, lastName, jobTitle, twitter} = this.props  
+
 		return (
 			<div className="Badge">
 				<div className="Badge__header">
@@ -15,12 +17,12 @@ class Badge extends React.Component {
 
 				<div className="Badge__section-name">
 					<img className="Badge__avatar" src="https://www.gravatar.com/avatar?d=identicon" alt="Avatar"/>
-					<h1>Richard <br/> Kaufman</h1>
+					<h1>{firstName} <br/> {lastName}</h1>
 				</div>
 
 				<div className="Badge__section-info">
-					<h3>Fronted Enginner</h3>
-					<div>@sparragus</div>
+					<h3>{jobTitle}</h3>
+					<div>@{twitter}</div>
 				</div>
 
 				<div className="Badge__footer">
