@@ -1,19 +1,19 @@
-import React from "react"
+import React, { Component } from "react"
 
 import "./styles/NavBar.css"
 import logo from "../images/logo.svg"
 
-class NavBar extends React.Component {
+class NavBar extends Component {
 	render() {
 		return (
 			<div className="Navbar">
-			<div className="container-fluid">
-				<a href="/" className="Navbar__brand">
-					<img src={logo} alt="Logo" className="Navbar__brand-logo"/>
-					<span className="font-weight-light">Platzi</span>
-					<span className="font-weight-bold">Conf</span>
-				</a>
-			</div>
+				<div className="container-fluid">
+					<a href="/" className="Navbar__brand">
+						<img src={logo} alt="Logo" className="Navbar__brand-logo" />
+						<span className="font-weight-light">Platzi</span>
+						<span className="font-weight-bold">Conf</span>
+					</a>
+				</div>
 			</div>
 		)
 	}
