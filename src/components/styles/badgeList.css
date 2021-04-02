@@ -1,0 +1,27 @@
+.list__container {
+	display: flex;
+	background: #FFFFFF;
+	margin-bottom: 15px;
+}
+
+.list__icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 20px;
+}
+
+.list__title {
+	font-size: 1.5rem;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.list__social {
+	width: 30px;
+	height: 30px;
+}
+
+.list__social span {
+	color: #40A6ED;
+}
