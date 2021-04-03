@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./styles/BadgeNew.css"
-import header from "../images/badge-header.svg"
+import confLogo from "../images/platziconf-logo.svg"
 import Badge from "../components/Badge"
 import BadgeForm from "../components/BadgeForm"
 
@@ -31,7 +31,7 @@ class BadgeNew extends Component {
 		return (
 			<>
 				<div className="BadgeNew__hero">
-					<img src={header} alt="logo" className="img-fluid" />
+					<img src={confLogo} alt="logo" className="img-fluid" />
 				</div>
 
 				<div className="container">

@@ -5,7 +5,7 @@ import logoTwitter from "../images/twitter.svg"
 
 import { Link } from "react-router-dom"
 
-import confLogo from "../images/badge-header.svg"
+import confLogo from "../images/platziconf-logo.svg"
 import BadgesList from "../components/BadgesList"
 
 export class Badges extends Component {
