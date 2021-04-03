@@ -21,7 +21,7 @@ class BadgeForm extends Component {
 
 	render() {
 		return (
-			<div>
+			<>
 				<h1>New Attendant</h1>
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
@@ -83,7 +83,7 @@ class BadgeForm extends Component {
 						Save
 					</button>
 				</form>
-			</div>
+			</>
 		)
 	}
 }

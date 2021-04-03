@@ -1,25 +1,25 @@
 import React, { Component } from "react"
 
-import "./styles/badgeList.css"
+import "./styles/BadgeList.css"
 
 export class BadgesList extends Component {
 	render() {
 		return (
 			<ul className="list-unstyled">
-				{this.props.badges.map(badge => {
+				{this.props.badges.results.map(badge => {
 					return (
 						<li key={badge.id} className="list__container">
 							<div className="list__icon">
-								<img src={badge.avatarUrl} alt="avatar del usuario" />
+								<img src={badge.image} alt="avatar del usuario" />
 							</div>
 							<div className="list__detais">
 								<h1 className="list__title">
-									{badge.firstName} {badge.lastName}
+									{badge.name}
 								</h1>
 								<a href="https://twitter.com/@jasba24" target="_blank" rel="noopener noreferrer" className="list__social">
-									<img src={this.props.img} alt="logo de la red social" /> <span>@{badge.twitter}</span>
+									<img src={this.props.img} alt="logo de la red social" /> <span>@{badge.origin.name}</span>
 								</a>
-								<p>{badge.jobTitle}</p>
+								<p>{badge.location.name}</p>
 							</div>
 						</li>
 					)

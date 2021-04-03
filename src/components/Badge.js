@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import "./styles/bagde.css"
+import "./styles/Badge.css"
 
 import confLogo from "../images/badge-header.svg"
 
