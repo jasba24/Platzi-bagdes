@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import Skeleton from "react-loading-skeleton"
+
 import "./styles/Badges.css"
 import logoTwitter from "../images/twitter.svg"
 
@@ -12,45 +14,44 @@ export class Badges extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			nextPage: 1,
+			loading: true,
+			error: null,
 			data: {
-				results: []
+				results: [],
 			},
 		}
-		console.log("1. constructor()")
 	}
 	componentDidMount() {
 		this.fetchCharacters()
 	}
 
 	fetchCharacters = async () => {
-		const response = await fetch("https://rickandmortyapi.com/api/character")
-		const data = await response.json()
+		this.setState({ loading: true, error: null })
 
-		this.setState({
-			data
-		})
-	}
+		try {
+			const response = await fetch(
+				`https://rickandmortyapi.com/api/character?page=${this.state.nextPage}`
+			)
+			const data = await response.json()
 
-	componentDidUpdate(prevProps, prevState) {
-		console.log("5, componentDidUpdate")
-		console.log({
-			prevProps: prevProps,
-			prevState: prevState,
-		})
-
-		console.log({
-			pros: this.props,
-			state: this.state,
-		})
-	}
-
-	componentWillUnmount() {
-		console.log("6, componentWillUnmount");
-		clearTimeout(this.timeoutID)
+			this.setState({
+				loading: false,
+				data: {
+					info: data.info,
+					results: [].concat(this.state.data.results, data.results),
+				},
+				nextPage: this.state.nextPage + 1,
+			})
+		} catch (error) {
+			this.setState({ loading: false, error })
+		}
 	}
 
 	render() {
-		console.log("2, render()")
+		if (this.state.error) {
+			return `Error: ${this.state.error.message}`
+		}
 		return (
 			<>
 				<div className="Badges">
@@ -76,6 +77,19 @@ export class Badges extends Component {
 				<div className="Badges__list">
 					<div className="Badges__container">
 						<BadgesList badges={this.state.data} img={logoTwitter} />
+						{this.state.loading && (
+							<Skeleton count={5} height="120px"></Skeleton>
+						)}
+						{!this.state.loading && (
+							<>
+								<button
+									onClick={() => this.fetchCharacters()}
+									className="btn btn-primary load"
+								>
+									Load More
+								</button>
+							</>
+						)}
 					</div>
 				</div>
 			</>

@@ -43,7 +43,7 @@ class BadgeNew extends Component {
 								twitter={this.state.form.twitter}
 								jobTitle={this.state.form.jobTitle}
 								email={this.state.form.email}
-								avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"
+								avatarUrl="https://pbs.twimg.com/profile_images/1336416549045932033/kTWixgNQ_400x400.jpg"
 							/>
 						</div>
 						<div className="col-6">

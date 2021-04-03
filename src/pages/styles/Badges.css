@@ -28,3 +28,12 @@
 	justify-content: flex-end;
 	margin-bottom: 1rem;
 }
+
+.loader {
+	background: url("../../images/loader.gif");
+}
+
+.load {
+	width: 100%;
+	margin-bottom: 50px;
+}

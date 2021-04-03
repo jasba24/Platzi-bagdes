@@ -1,12 +1,12 @@
 import React from "react"
 import "./styles/NotFound.css"
-import logo from "../images/badge-header.svg"
+import img404 from "../images/img404.jpg"
 
 function NotFound() {
 	return (
 		<div className="error__container">
-			<img src={logo} alt=""/>
-			<h1>404 not found</h1>
+			<img src={img404} alt=""/>
+			<h1>Ups! error 404</h1>
 		</div>
 	)
 }

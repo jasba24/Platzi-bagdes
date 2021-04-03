@@ -10,7 +10,8 @@
 
 .error__container h1 {
 	color: white;
-	font-size: 10rem;
+	font-size: 8rem;
+	text-transform: uppercase;
 }
 
 .error__container img {
