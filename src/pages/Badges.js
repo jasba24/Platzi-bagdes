@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import api from "../api"
+
 import Skeleton from "react-loading-skeleton"
 
 import "./styles/Badges.css"
@@ -14,44 +16,35 @@ export class Badges extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			nextPage: 1,
 			loading: true,
 			error: null,
-			data: {
-				results: [],
-			},
+			data: undefined,
 		}
 	}
 	componentDidMount() {
-		this.fetchCharacters()
+		this.fetchData()
 	}
 
-	fetchCharacters = async () => {
+	fetchData = async () => {
 		this.setState({ loading: true, error: null })
 
 		try {
-			const response = await fetch(
-				`https://rickandmortyapi.com/api/character?page=${this.state.nextPage}`
-			)
-			const data = await response.json()
-
-			this.setState({
-				loading: false,
-				data: {
-					info: data.info,
-					results: [].concat(this.state.data.results, data.results),
-				},
-				nextPage: this.state.nextPage + 1,
-			})
+			const data = await api.badges.list()
+			this.setState({ loading: false, data: data })
 		} catch (error) {
-			this.setState({ loading: false, error })
+			this.setState({ loading: false, error: error })
 		}
 	}
 
 	render() {
+		if (this.state.loading === true) {
+			return "loading..."
+		}
+
 		if (this.state.error) {
 			return `Error: ${this.state.error.message}`
 		}
+
 		return (
 			<>
 				<div className="Badges">
@@ -79,16 +72,6 @@ export class Badges extends Component {
 						<BadgesList badges={this.state.data} img={logoTwitter} />
 						{this.state.loading && (
 							<Skeleton count={5} height="120px"></Skeleton>
-						)}
-						{!this.state.loading && (
-							<>
-								<button
-									onClick={() => this.fetchCharacters()}
-									className="btn btn-primary load"
-								>
-									Load More
-								</button>
-							</>
 						)}
 					</div>
 				</div>
