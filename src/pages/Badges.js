@@ -11,6 +11,8 @@ import { Link } from "react-router-dom"
 
 import confLogo from "../images/platziconf-logo.svg"
 import BadgesList from "../components/BadgesList"
+import PageLoading from "../components/PageLoading"
+import PageError from "../components/PageError"
 
 export class Badges extends Component {
 	constructor(props) {
@@ -38,11 +40,11 @@ export class Badges extends Component {
 
 	render() {
 		if (this.state.loading === true) {
-			return "loading..."
+			return <PageLoading />
 		}
 
 		if (this.state.error) {
-			return `Error: ${this.state.error.message}`
+			return <PageError error={this.state.error} />
 		}
 
 		return (
