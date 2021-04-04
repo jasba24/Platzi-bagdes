@@ -20,6 +20,10 @@
 	padding: 1rem 0;
 }
 
+.Badge__section-name h1 {
+	font-weight: bold;
+}
+
 .Badge__section-info {
 	display: flex;
 	flex-direction: column;

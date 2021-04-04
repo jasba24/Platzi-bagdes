@@ -3,6 +3,7 @@ import "./styles/BadgeNew.css"
 import confLogo from "../images/platziconf-logo.svg"
 import Badge from "../components/Badge"
 import BadgeForm from "../components/BadgeForm"
+import api from "../api"
 
 class BadgeNew extends Component {
 	state = {
@@ -27,28 +28,44 @@ class BadgeNew extends Component {
 		})
 	}
 
+	handleSubmit = async e => {
+		e.preventDefault()
+		this.setState({ loading: true, error: null })
+
+		try {
+			await api.badges.create(this.state.form)
+			this.setState({ loading: false })
+		} catch (error) {
+			this.setState({ loading: false, error: error })
+		}
+	}
+
 	render() {
 		return (
 			<>
 				<div className="BadgeNew__hero">
-					<img src={confLogo} alt="logo" className="img-fluid" />
+					<img
+						src={confLogo}
+						alt="logo"
+						className="BadgeNew__hero--image img-fluid"
+					/>
 				</div>
 
 				<div className="container">
 					<div className="row">
 						<div className="col-6">
 							<Badge
-								firstName={this.state.form.firstName}
-								lastName={this.state.form.lastName}
-								twitter={this.state.form.twitter}
-								jobTitle={this.state.form.jobTitle}
-								email={this.state.form.email}
-								avatarUrl="https://pbs.twimg.com/profile_images/1336416549045932033/kTWixgNQ_400x400.jpg"
+								firstName={this.state.form.firstName || "FIRST_NAME"}
+								lastName={this.state.form.lastName || "LAST_NAME"}
+								twitter={this.state.form.twitter || "twitter"}
+								jobTitle={this.state.form.jobTitle || "JOB_TITLE"}
+								email={this.state.form.email || "EMAIL"}
 							/>
 						</div>
 						<div className="col-6">
 							<BadgeForm
 								onChange={this.handleChange}
+								onSubmit={this.handleSubmit}
 								formValues={this.state.form}
 							/>
 						</div>
