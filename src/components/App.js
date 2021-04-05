@@ -6,6 +6,7 @@ import BadgeNew from "../pages/BadgeNew"
 import Badges from "../pages/Badges"
 import NotFound from "../pages/NotFound"
 import NavBar from "./NavBar"
+import BadgeEdit from '../pages/BadgeEdit';
 
 function App() {
 	return (
@@ -15,6 +16,7 @@ function App() {
 				<Route exact path="/" component={Home}></Route>
 				<Route exact path="/badges" component={Badges}></Route>
 				<Route exact path="/badges/new" component={BadgeNew}></Route>
+				<Route exact path="/badges/:badgeId/edit" component={BadgeEdit}></Route>
 				<Route component={NotFound} />
 			</Switch>
 		</BrowserRouter>

@@ -16,9 +16,9 @@ export class BadgesList extends Component {
 		}
 		return (
 			<ul className="list-unstyled">
-				{this.props.badges.map(badge => {
+				{this.props.badges.reverse().map(badge => {
 					return (
-						<li key={badge.id} className="list__container">
+						<Link to={`/badges/${badge.id}/edit`} key={badge.id} className="list__container text-reset text-decoration-none">
 							<div className="list__icon">
 								<Gravatar email={badge.email} alt="avatar del usuario" />
 							</div>
@@ -37,7 +37,7 @@ export class BadgesList extends Component {
 								</a>
 								<p>{badge.jobTitle}</p>
 							</div>
-						</li>
+						</Link>
 					)
 				})}
 			</ul>
