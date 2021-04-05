@@ -26,7 +26,7 @@ class BadgeForm extends Component {
 				<form onSubmit={this.props.onSubmit}>
 					<div className="form-group">
 						<label>First Name</label>
-						<input
+						<input required
 							onChange={this.props.onChange}
 							className="form-control"
 							name="firstName"
@@ -37,7 +37,7 @@ class BadgeForm extends Component {
 
 					<div className="form-group">
 						<label>Last Name</label>
-						<input
+						<input required
 							onChange={this.props.onChange}
 							className="form-control"
 							name="lastName"
@@ -48,7 +48,7 @@ class BadgeForm extends Component {
 
 					<div className="form-group">
 						<label>Email</label>
-						<input
+						<input required
 							onChange={this.props.onChange}
 							className="form-control"
 							name="email"
@@ -59,7 +59,7 @@ class BadgeForm extends Component {
 
 					<div className="form-group">
 						<label>Job Title</label>
-						<input
+						<input required
 							onChange={this.props.onChange}
 							className="form-control"
 							name="jobTitle"
@@ -70,7 +70,7 @@ class BadgeForm extends Component {
 
 					<div className="form-group">
 						<label>Twitter</label>
-						<input
+						<input required
 							onChange={this.props.onChange}
 							className="form-control"
 							name="twitter"
@@ -82,6 +82,10 @@ class BadgeForm extends Component {
 					<button onClick={this.handleClick} className="btn btn-primary">
 						Save
 					</button>
+
+					{this.props.error && (
+						<p className="alert alert-danger mb-3" role="alert">{this.props.error.message}</p>
+					)}
 				</form>
 			</>
 		)

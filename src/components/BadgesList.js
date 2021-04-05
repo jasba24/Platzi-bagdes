@@ -20,7 +20,8 @@ export class BadgesList extends Component {
 					return (
 						<li key={badge.id} className="list__container">
 							<div className="list__icon">
-								{/* <Gravatar src={badge.email} alt="avatar del usuario" /> */}
+								<Gravatar src={badge.email} alt="avatar del usuario" />
+								console.log({badge.email})
 							</div>
 							<div className="list__detais">
 								<h1 className="list__title">

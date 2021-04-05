@@ -4,9 +4,12 @@ import confLogo from "../images/platziconf-logo.svg"
 import Badge from "../components/Badge"
 import BadgeForm from "../components/BadgeForm"
 import api from "../api"
+import PageLoading from '../components/PageLoading';
 
 class BadgeNew extends Component {
 	state = {
+		loading: false,
+		error: null,
 		form: {
 			firstName: "",
 			lastName: "",
@@ -35,12 +38,17 @@ class BadgeNew extends Component {
 		try {
 			await api.badges.create(this.state.form)
 			this.setState({ loading: false })
+
+			this.props.history.push("/badges")
 		} catch (error) {
 			this.setState({ loading: false, error: error })
 		}
 	}
 
 	render() {
+		if (this.state.loading) {
+			return <PageLoading />
+		}
 		return (
 			<>
 				<div className="BadgeNew__hero">
@@ -59,7 +67,7 @@ class BadgeNew extends Component {
 								lastName={this.state.form.lastName || "LAST_NAME"}
 								twitter={this.state.form.twitter || "twitter"}
 								jobTitle={this.state.form.jobTitle || "JOB_TITLE"}
-								email={this.state.form.email || "EMAIL"}
+								email={this.state.form.email}
 							/>
 						</div>
 						<div className="col-6">
@@ -67,6 +75,7 @@ class BadgeNew extends Component {
 								onChange={this.handleChange}
 								onSubmit={this.handleSubmit}
 								formValues={this.state.form}
+								error={this.state.error}
 							/>
 						</div>
 					</div>
