@@ -1,9 +1,6 @@
 import React, { Component } from "react"
 
 import api from "../api"
-
-import Skeleton from "react-loading-skeleton"
-
 import "./styles/Badges.css"
 import logoTwitter from "../images/twitter.svg"
 
@@ -13,6 +10,7 @@ import confLogo from "../images/platziconf-logo.svg"
 import BadgesList from "../components/BadgesList"
 import PageLoading from "../components/PageLoading"
 import PageError from "../components/PageError"
+import MiniLoader from '../components/MiniLoader';
 
 export class Badges extends Component {
 	constructor(props) {
@@ -24,7 +22,13 @@ export class Badges extends Component {
 		}
 	}
 	componentDidMount() {
-		this.fetchData()
+		this.intervalId = this.fetchData()
+
+		setInterval(this.fetchData, 5000)
+	}
+
+	componentWillMount() {
+		clearInterval(this.intervalId)
 	}
 
 	fetchData = async () => {
@@ -39,7 +43,7 @@ export class Badges extends Component {
 	}
 
 	render() {
-		if (this.state.loading === true) {
+		if (this.state.loading === true && !this.state.data) {
 			return <PageLoading />
 		}
 
@@ -73,7 +77,7 @@ export class Badges extends Component {
 					<div className="Badges__container">
 						<BadgesList badges={this.state.data} img={logoTwitter} />
 						{this.state.loading && (
-							<Skeleton count={5} height="120px"></Skeleton>
+							<MiniLoader />
 						)}
 					</div>
 				</div>

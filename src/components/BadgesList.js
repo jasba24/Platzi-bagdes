@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 
 import "./styles/BadgeList.css"
-import Gravatar from './Gravatar';
+import Gravatar from "./Gravatar"
 
 export class BadgesList extends Component {
 	render() {
@@ -10,15 +10,21 @@ export class BadgesList extends Component {
 			return (
 				<div>
 					<h3>No badges were found</h3>
-					<Link className="btn btn-primary" to="/badges/new">Create new badge</Link>
+					<Link className="btn btn-primary" to="/badges/new">
+						Create new badge
+					</Link>
 				</div>
 			)
 		}
 		return (
 			<ul className="list-unstyled">
-				{this.props.badges.reverse().map(badge => {
+				{this.props.badges.map(badge => {
 					return (
-						<Link to={`/badges/${badge.id}/edit`} key={badge.id} className="list__container text-reset text-decoration-none">
+						<Link
+							to={`/badges/${badge.id}/edit`}
+							key={badge.id}
+							className="list__container text-reset text-decoration-none"
+						>
 							<div className="list__icon">
 								<Gravatar email={badge.email} alt="avatar del usuario" />
 							</div>
@@ -26,15 +32,15 @@ export class BadgesList extends Component {
 								<h1 className="list__title">
 									{badge.firstName} {badge.lastName}
 								</h1>
-								<a
-									href="https://twitter.com/@jasba24"
+								<Link
+									to="https://twitter.com/@jasba24"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="list__social"
 								>
 									<img src={this.props.img} alt="logo de la red social" />{" "}
 									<span>@{badge.twitter}</span>
-								</a>
+								</Link>
 								<p>{badge.jobTitle}</p>
 							</div>
 						</Link>
