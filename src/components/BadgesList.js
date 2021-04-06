@@ -21,7 +21,7 @@ export class BadgesList extends Component {
 				{this.props.badges.map(badge => {
 					return (
 						<Link
-							to={`/badges/${badge.id}/edit`}
+							to={`/badges/${badge.id}`}
 							key={badge.id}
 							className="list__container text-reset text-decoration-none"
 						>
