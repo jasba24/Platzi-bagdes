@@ -1,24 +1,67 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 
 import "./styles/BadgeList.css"
 import Gravatar from "./Gravatar"
 
-export class BadgesList extends Component {
-	render() {
-		if (this.props.badges.length === 0) {
-			return (
-				<div>
-					<h3>No badges were found</h3>
-					<Link className="btn btn-primary" to="/badges/new">
-						Create new badge
-					</Link>
-				</div>
-			)
-		}
+function useSearchBadges(badges) {
+	const [query, setQuery] = React.useState("")
+	const [filteredBadges, setFilteredBadges] = React.useState(badges)
+
+	React.useMemo(() => {
+		const result = badges.filter(badge => {
+			return `${badge.firstName} ${badge.lastName}`
+				.toLowerCase()
+				.includes(query.toLowerCase())
+		})
+
+		setFilteredBadges(result)
+	}, [badges, query])
+
+	return { query, setQuery, filteredBadges }
+}
+
+function BadgesList(props) {
+	const badges = props.badges
+
+	const { query, setQuery, filteredBadges } = useSearchBadges(badges)
+
+	if (filteredBadges.length === 0) {
 		return (
+			<div>
+				<div className="form-group">
+					<label>Filter Badges</label>
+					<input
+						type="text"
+						className="form-control"
+						value={query}
+						onChange={e => {
+							setQuery(e.target.value)
+						}}
+					/>
+				</div>
+				<h3>No badges were found</h3>
+				<Link className="btn btn-primary" to="/badges/new">
+					Create new badge
+				</Link>
+			</div>
+		)
+	}
+	return (
+		<div className="BadgesList">
+			<div className="form-group">
+				<label>Filter Badges</label>
+				<input
+					type="text"
+					className="form-control"
+					value={query}
+					onChange={e => {
+						setQuery(e.target.value)
+					}}
+				/>
+			</div>
 			<ul className="list-unstyled">
-				{this.props.badges.map(badge => {
+				{filteredBadges.map(badge => {
 					return (
 						<Link
 							to={`/badges/${badge.id}`}
@@ -38,7 +81,7 @@ export class BadgesList extends Component {
 									rel="noopener noreferrer"
 									className="list__social"
 								>
-									<img src={this.props.img} alt="logo de la red social" />{" "}
+									<img src={props.img} alt="logo de la red social" />{" "}
 									<span>@{badge.twitter}</span>
 								</Link>
 								<p>{badge.jobTitle}</p>
@@ -47,8 +90,8 @@ export class BadgesList extends Component {
 					)
 				})}
 			</ul>
-		)
-	}
+		</div>
+	)
 }
 
 export default BadgesList
