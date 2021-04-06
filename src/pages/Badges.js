@@ -10,7 +10,7 @@ import confLogo from "../images/platziconf-logo.svg"
 import BadgesList from "../components/BadgesList"
 import PageLoading from "../components/PageLoading"
 import PageError from "../components/PageError"
-import MiniLoader from '../components/MiniLoader';
+import MiniLoader from "../components/MiniLoader"
 
 export class Badges extends Component {
 	constructor(props) {
@@ -22,12 +22,12 @@ export class Badges extends Component {
 		}
 	}
 	componentDidMount() {
-		this.intervalId = this.fetchData()
+		this.fetchData()
 
-		setInterval(this.fetchData, 5000)
+		this.intervalId = setInterval(this.fetchData, 5000)
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		clearInterval(this.intervalId)
 	}
 
@@ -76,9 +76,7 @@ export class Badges extends Component {
 				<div className="Badges__list">
 					<div className="Badges__container">
 						<BadgesList badges={this.state.data} img={logoTwitter} />
-						{this.state.loading && (
-							<MiniLoader />
-						)}
+						{this.state.loading && <MiniLoader />}
 					</div>
 				</div>
 			</>
