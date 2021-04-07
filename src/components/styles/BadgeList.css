@@ -1,6 +1,6 @@
 .list__container {
 	display: flex;
-	background: #FFFFFF;
+	background: #ffffff;
 	margin-bottom: 15px;
 }
 
@@ -29,5 +29,5 @@
 }
 
 .list__social span {
-	color: #40A6ED;
+	color: #40a6ed;
 }

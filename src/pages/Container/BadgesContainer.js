@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import api from "../../api"
 import PageLoading from "../../components/PageLoading"
 import PageError from "../../components/PageError"
-import Badges from '../Badges';
+import Badges from "../Badges"
 
 class BadgesContainer extends Component {
 	constructor(props) {
@@ -46,7 +46,7 @@ class BadgesContainer extends Component {
 
 		return (
 			<>
-				<Badges data={this.state.data} loading={this.props.loading}/>
+				<Badges data={this.state.data} loading={this.props.loading} />
 			</>
 		)
 	}

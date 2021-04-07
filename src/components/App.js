@@ -6,8 +6,8 @@ import BadgeNew from "../pages/Container/BadgeNewContainer"
 import Badges from "../pages/Container/BadgesContainer"
 import NotFound from "../pages/NotFound"
 import NavBar from "./NavBar"
-import BadgeEdit from '../pages/Container/BadgeEditContainer';
-import BadgeDetails from '../pages/Container/BadgeDetailsContainer';
+import BadgeEdit from "../pages/Container/BadgeEditContainer"
+import BadgeDetails from "../pages/Container/BadgeDetailsContainer"
 
 function App() {
 	return (
