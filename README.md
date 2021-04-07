@@ -22,4 +22,6 @@ RUN
 
 Run the project in local using
 
+`npm install`
+
 `npm run start`
