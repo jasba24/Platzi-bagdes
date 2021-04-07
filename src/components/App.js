@@ -2,12 +2,12 @@ import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 import Home from "../pages/Home"
-import BadgeNew from "../pages/BadgeNew"
-import Badges from "../pages/Badges"
+import BadgeNew from "../pages/Container/BadgeNewContainer"
+import Badges from "../pages/Container/BadgesContainer"
 import NotFound from "../pages/NotFound"
 import NavBar from "./NavBar"
-import BadgeEdit from '../pages/BadgeEdit';
-import BadgeDetails from '../pages/BadgeDetailsContainer';
+import BadgeEdit from '../pages/Container/BadgeEditContainer';
+import BadgeDetails from '../pages/Container/BadgeDetailsContainer';
 
 function App() {
 	return (

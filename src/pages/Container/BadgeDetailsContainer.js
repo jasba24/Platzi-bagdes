@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 
-import PageLoading from "../components/PageLoading"
-import PageError from "../components/PageError"
-import api from "../api"
-import BadgeDetails from "./BadgeDetails"
+import PageLoading from "../../components/PageLoading"
+import PageError from "../../components/PageError"
+import api from "../../api"
+import BadgeDetails from "../BadgeDetails"
 
 class BadgeDetailsContainer extends Component {
 	state = {
