@@ -1,27 +1,29 @@
-Platzi-bagdes
-=============
-Project of the course of React
+# PlatziVideoReact
 
-Clone the project
-=============
+## Description
 
-SSH
+React Course Project using a fake API created with json-server
 
-`git@github.com:jasba24/Platzi-bagdes.git`
+## Project setup
 
-HTTPS
+```
+npm install
+```
 
-`https://github.com/jasba24/Platzi-bagdes.git`
+### Compiles and hot-reloads for development
 
-GITHUB CLI
+```
+npm run start or npm run client
+```
 
-`gh repo clone jasba24/Platzi-bagdes`
+### Compiles and minifies for production
 
-RUN
-=============
+```
+npm run build
+```
 
-Run the project in local using
+### Run your tests
 
-`npm install`
-
-`npm run start`
+```
+npm run test
+```
