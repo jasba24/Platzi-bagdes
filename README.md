@@ -1,4 +1,4 @@
-# PlatziVideoReact
+# Platzi-Badges
 
 ## Description
 
