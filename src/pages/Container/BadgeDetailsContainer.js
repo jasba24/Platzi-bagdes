@@ -1,74 +1,75 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from 'react'
 
-import PageLoading from "../../components/PageLoading"
-import PageError from "../../components/PageError"
-import api from "../../api"
-import BadgeDetails from "../BadgeDetails"
+import PageLoading from '../../components/PageLoading'
+import PageError from '../../components/PageError'
+import api from '../../api'
+import BadgeDetails from '../BadgeDetails'
 
-class BadgeDetailsContainer extends Component {
-	state = {
-		loading: true,
-		error: null,
-		data: undefined,
-		modalIsOpen: false,
-	}
+function BadgeDetailsContainer() {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [data, setData] = useState(undefined)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
-	componentDidMount() {
-		this.fetchData()
-	}
+  useEffect(() => {
+    fetchData()
+  }, [])
 
-	fetchData = async () => {
-		this.setState({ loading: true, error: null })
+  const fetchData = async () => {
+    setLoading(true)
+    setError(null)
 
-		try {
-			const data = await api.badges.read(this.props.match.params.badgeId)
+    try {
+      const data = await api.badges.read(this.props.match.params.badgeId)
 
-			this.setState({ loading: false, data })
-		} catch (error) {
-			this.setState({ loading: false, error })
-		}
-	}
+      setLoading(false)
+      setData(data)
+    } catch (error) {
+      setLoading(false)
+      setError(error)
+    }
+  }
 
-	handleOpenModal = e => {
-		this.setState({ modalIsOpen: true })
-	}
+  const handleOpenModal = (e) => {
+    setModalIsOpen(true)
+  }
 
-	handleCloseModal = e => {
-		this.setState({ modalIsOpen: false })
-	}
+  const handleCloseModal = (e) => {
+    setModalIsOpen(false)
+  }
 
-	handleDeleteBadge = async e => {
-		this.setState({ loading: true, error: null })
+  const handleDeleteBadge = async (e) => {
+    setLoading(true)
+    setError(null)
 
-		try {
-			await api.badges.remove(this.props.match.params.badgeId)
-			this.setState({ loading: false })
+    try {
+      await api.badges.remove(this.props.match.params.badgeId)
+      setLoading(false)
 
-			this.props.history.push("/badges")
-		} catch (error) {
-			this.setState({ loading: false, error })
-		}
-	}
+      this.props.history.push('/badges')
+    } catch (error) {
+      setLoading(false)
+      setError(error)
+    }
+  }
 
-	render() {
-		if (this.state.loading) {
-			return <PageLoading />
-		}
+  if (loading) {
+    return <PageLoading />
+  }
 
-		if (this.state.error) {
-			return <PageError error={this.state.error} />
-		}
+  if (error) {
+    return <PageError error={error} />
+  }
 
-		return (
-			<BadgeDetails
-				onCloseModal={this.handleCloseModal}
-				onOpenModal={this.handleOpenModal}
-				modalIsOpen={this.state.modalIsOpen}
-				onDeleteBadge={this.handleDeleteBadge}
-				badge={this.state.data}
-			/>
-		)
-	}
+  return (
+    <BadgeDetails
+      onCloseModal={handleCloseModal}
+      onOpenModal={handleOpenModal}
+      modalIsOpen={modalIsOpen}
+      onDeleteBadge={handleDeleteBadge}
+      badge={data}
+    />
+  )
 }
 
 export default BadgeDetailsContainer

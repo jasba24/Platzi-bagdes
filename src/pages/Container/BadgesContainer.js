@@ -1,55 +1,49 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from 'react'
 
-import api from "../../api"
-import PageLoading from "../../components/PageLoading"
-import PageError from "../../components/PageError"
-import Badges from "../Badges"
+import api from '../../api'
+import PageLoading from '../../components/PageLoading'
+import PageError from '../../components/PageError'
+import Badges from '../Badges'
 
-class BadgesContainer extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			loading: true,
-			error: null,
-			data: undefined,
-		}
-	}
-	componentDidMount() {
-		this.fetchData()
+function BadgesContainer() {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [data, setData] = useState(undefined)
+  // const [intervalId, setIntervalId] = useState(null)
 
-		this.intervalId = setInterval(this.fetchData, 5000)
-	}
+  useEffect(() => {
+    fetchData()
+  }, [])
 
-	componentWillUnmount() {
-		clearInterval(this.intervalId)
-	}
+  const fetchData = async () => {
+    setLoading(true)
+    setError(null)
 
-	fetchData = async () => {
-		this.setState({ loading: true, error: null })
+    try {
+      const dataList = await api.badges.list()
+			console.log({dataList});
+      setLoading(false)
+      setData(dataList)
+			console.log({data});
+    } catch (error) {
+      setLoading(false)
+      setError(error)
+    }
+  }
 
-		try {
-			const data = await api.badges.list()
-			this.setState({ loading: false, data: data })
-		} catch (error) {
-			this.setState({ loading: false, error: error })
-		}
-	}
+  if (loading === true && !data) {
+    return <PageLoading />
+  }
 
-	render() {
-		if (this.state.loading === true && !this.state.data) {
-			return <PageLoading />
-		}
+  if (error) {
+    return <PageError error={error} />
+  }
 
-		if (this.state.error) {
-			return <PageError error={this.state.error} />
-		}
-
-		return (
-			<>
-				<Badges data={this.state.data} loading={this.props.loading} />
-			</>
-		)
-	}
+  return (
+    <>
+      <Badges data={data} loading={loading} />
+    </>
+  )
 }
 
 export default BadgesContainer

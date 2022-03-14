@@ -1,101 +1,87 @@
-import React, { Component } from "react"
+import React from 'react'
 
-class BadgeForm extends Component {
-	state = {
-		jobTitle: "Designer",
-	}
+function BadgeForm(props) {
+  const { onSubmit, onChange, formValues, error } = props
 
-	// handleChange = e => {
-	//   this.setState({
-	//     [e.target.props.formValues: e.target.value,
-	//   })
-	// }
+  const handleClick = (e) => {
+    console.log('button was clicked')
+  }
 
-	handleClick = e => {
-		console.log("button was clicked")
-	}
+  return (
+    <>
+      <form onSubmit={onSubmit}>
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            required
+            onChange={onChange}
+            className="form-control"
+            name="firstName"
+            type="text"
+            value={formValues.firstName}
+          />
+        </div>
 
-	handleSubmit = e => {
-		e.preventDefault()
-	}
+        <div className="form-group">
+          <label>Last Name</label>
+          <input
+            required
+            onChange={onChange}
+            className="form-control"
+            name="lastName"
+            type="text"
+            value={formValues.lastName}
+          />
+        </div>
 
-	render() {
-		return (
-			<>
-				<form onSubmit={this.props.onSubmit}>
-					<div className="form-group">
-						<label>First Name</label>
-						<input
-							required
-							onChange={this.props.onChange}
-							className="form-control"
-							name="firstName"
-							type="text"
-							value={this.props.formValues.firstName}
-						/>
-					</div>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            required
+            onChange={onChange}
+            className="form-control"
+            name="email"
+            type="email"
+            value={formValues.email}
+          />
+        </div>
 
-					<div className="form-group">
-						<label>Last Name</label>
-						<input
-							required
-							onChange={this.props.onChange}
-							className="form-control"
-							name="lastName"
-							type="text"
-							value={this.props.formValues.lastName}
-						/>
-					</div>
+        <div className="form-group">
+          <label>Job Title</label>
+          <input
+            required
+            onChange={onChange}
+            className="form-control"
+            name="jobTitle"
+            type="text"
+            value={formValues.jobTitle}
+          />
+        </div>
 
-					<div className="form-group">
-						<label>Email</label>
-						<input
-							required
-							onChange={this.props.onChange}
-							className="form-control"
-							name="email"
-							type="email"
-							value={this.props.formValues.email}
-						/>
-					</div>
+        <div className="form-group">
+          <label>Twitter</label>
+          <input
+            required
+            onChange={onChange}
+            className="form-control"
+            name="twitter"
+            type="text"
+            value={formValues.twitter}
+          />
+        </div>
 
-					<div className="form-group">
-						<label>Job Title</label>
-						<input
-							required
-							onChange={this.props.onChange}
-							className="form-control"
-							name="jobTitle"
-							type="text"
-							value={this.props.formValues.jobTitle}
-						/>
-					</div>
+        <button onClick={handleClick} className="btn btn-primary">
+          Save
+        </button>
 
-					<div className="form-group">
-						<label>Twitter</label>
-						<input
-							required
-							onChange={this.props.onChange}
-							className="form-control"
-							name="twitter"
-							type="text"
-							value={this.props.formValues.twitter}
-						/>
-					</div>
-
-					<button onClick={this.handleClick} className="btn btn-primary">
-						Save
-					</button>
-
-					{this.props.error && (
-						<p className="alert alert-danger mb-3" role="alert">
-							{this.props.error.message}
-						</p>
-					)}
-				</form>
-			</>
-		)
-	}
+        {error && (
+          <p className="alert alert-danger mb-3" role="alert">
+            {error.message}
+          </p>
+        )}
+      </form>
+    </>
+  )
 }
 
 export default BadgeForm
