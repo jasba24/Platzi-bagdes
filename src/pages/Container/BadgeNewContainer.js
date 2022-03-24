@@ -43,6 +43,9 @@ function BadgeNewContainer() {
   if (loading) {
     return <PageLoading />
   }
+  if(error) {
+    throw new Error(error)
+  }
   return (
     <BadgeNew form={form} onChange={handleChange} onSubmit={handleSubmit} />
   )

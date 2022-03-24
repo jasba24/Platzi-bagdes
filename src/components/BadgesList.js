@@ -23,7 +23,6 @@ function useSearchBadges(badges) {
 
 function BadgesList(props) {
   const badges = props.badges
-	console.log({badges})
 
   const { query, setQuery, filteredBadges } = useSearchBadges(badges)
 

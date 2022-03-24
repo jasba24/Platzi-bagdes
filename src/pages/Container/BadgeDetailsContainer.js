@@ -5,7 +5,7 @@ import PageError from '../../components/PageError'
 import api from '../../api'
 import BadgeDetails from '../BadgeDetails'
 
-function BadgeDetailsContainer() {
+function BadgeDetailsContainer(props) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [data, setData] = useState(undefined)
@@ -20,7 +20,7 @@ function BadgeDetailsContainer() {
     setError(null)
 
     try {
-      const data = await api.badges.read(this.props.match.params.badgeId)
+      const data = await api.badges.read(props.match.params.badgeId)
 
       setLoading(false)
       setData(data)
@@ -30,23 +30,23 @@ function BadgeDetailsContainer() {
     }
   }
 
-  const handleOpenModal = (e) => {
+  const handleOpenModal = e => {
     setModalIsOpen(true)
   }
 
-  const handleCloseModal = (e) => {
+  const handleCloseModal = e => {
     setModalIsOpen(false)
   }
 
-  const handleDeleteBadge = async (e) => {
+  const handleDeleteBadge = async e => {
     setLoading(true)
     setError(null)
 
     try {
-      await api.badges.remove(this.props.match.params.badgeId)
+      await api.badges.remove(props.match.params.badgeId)
       setLoading(false)
 
-      this.props.history.push('/badges')
+      props.history.push('/badges')
     } catch (error) {
       setLoading(false)
       setError(error)
@@ -61,6 +61,11 @@ function BadgeDetailsContainer() {
     return <PageError error={error} />
   }
 
+  if (data === undefined) {
+    return null
+  }
+
+  console.log('container', props)
   return (
     <BadgeDetails
       onCloseModal={handleCloseModal}

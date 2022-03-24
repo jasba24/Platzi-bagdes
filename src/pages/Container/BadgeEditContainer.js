@@ -4,7 +4,7 @@ import BadgeEdit from '../BadgeEdit'
 import api from '../../api'
 import PageLoading from '../../components/PageLoading'
 
-function BadgeEditContainer() {
+function BadgeEditContainer(props) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({
@@ -19,12 +19,12 @@ function BadgeEditContainer() {
     fetchData()
   }, [])
 
-  const fetchData = async (e) => {
+  const fetchData = async e => {
     setLoading(true)
     setError(null)
 
     try {
-      const data = await api.badges.read(this.props.match.params.badgeId)
+      const data = await api.badges.read(props.match.params.badgeId)
 
       setLoading(false)
       setForm(data)
@@ -34,25 +34,25 @@ function BadgeEditContainer() {
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     // const nextForm = this.state.form
     // nextForm[e.target.name] = e.target.value
     setForm({
-      ...this.state.form,
+      ...form,
       [e.target.name]: e.target.value
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
     try {
-      await api.badges.update(this.props.match.params.badgeId, this.state.form)
+      await api.badges.update(props.match.params.badgeId, form)
       setLoading(false)
 
-      this.props.history.push('/badges')
+      props.history.push('/badges')
     } catch (error) {
       setLoading(false)
       setError(error)
@@ -62,6 +62,10 @@ function BadgeEditContainer() {
   if (loading) {
     return <PageLoading />
   }
+  if (form === undefined) {
+    return null
+  }
+
   return (
     <>
       <BadgeEdit
