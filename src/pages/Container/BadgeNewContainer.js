@@ -3,8 +3,8 @@ import api from '../../api'
 import PageLoading from '../../components/PageLoading'
 import BadgeNew from '../BadgeNew'
 
-function BadgeNewContainer() {
-  const [loading, setLoading] = useState(true)
+function BadgeNewContainer(props) {
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({
     firstName: '',
@@ -19,7 +19,7 @@ function BadgeNewContainer() {
     // nextForm[e.target.name] = e.target.value
 
     setForm({
-      ...this.state.form,
+      ...form,
       [e.target.name]: e.target.value
     })
   }
@@ -30,10 +30,10 @@ function BadgeNewContainer() {
     setError(null)
 
     try {
-      await api.badges.create(this.state.form)
+      await api.badges.create(form)
       setLoading(false)
 
-      this.props.history.push('/badges')
+      props.history.push('/badges')
     } catch (error) {
       setLoading(false)
       setError(error)

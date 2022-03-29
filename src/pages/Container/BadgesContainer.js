@@ -21,7 +21,6 @@ function BadgesContainer() {
 
     try {
       const dataList = await api.badges.list()
-      console.log({ dataList })
       setLoading(false)
       setData(dataList)
     } catch (error) {
@@ -37,9 +36,8 @@ function BadgesContainer() {
   if (error) {
     return <PageError error={error} />
   }
-  console.log({ data })
 
-  if(data === undefined) {
+  if (data === undefined) {
     return null
   }
 

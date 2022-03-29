@@ -45,12 +45,11 @@ function BadgeDetailsContainer(props) {
     try {
       await api.badges.remove(props.match.params.badgeId)
       setLoading(false)
-
-      props.history.push('/badges')
     } catch (error) {
       setLoading(false)
       setError(error)
     }
+    props.history.push('/badges')
   }
 
   if (loading) {
@@ -65,7 +64,6 @@ function BadgeDetailsContainer(props) {
     return null
   }
 
-  console.log('container', props)
   return (
     <BadgeDetails
       onCloseModal={handleCloseModal}

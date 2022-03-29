@@ -1,8 +1,6 @@
 const BASE_URL = 'https://platzi-badges-api.herokuapp.com/api/badges'
 
 async function callApi(endpoint, options) {
-  console.log(options)
-
   const url = BASE_URL + endpoint
   const response = await fetch(url, options)
   const data = await response.json()

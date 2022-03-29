@@ -3,7 +3,7 @@ import React from 'react'
 function BadgeForm(props) {
   const { onSubmit, onChange, formValues, error } = props
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     console.log('button was clicked')
   }
 

@@ -10,7 +10,6 @@ import BadgesList from '../components/BadgesList'
 import MiniLoader from '../components/MiniLoader'
 
 function Badges(props) {
-  console.log({props})
   return (
     <>
       <div className="Badges">
@@ -30,11 +29,11 @@ function Badges(props) {
       </div>
 
       <div className="Badges__list">
-				<div className="Badges__container">
-					<BadgesList badges={props.data} img={logoTwitter} />
-					{props.loading && <MiniLoader />}
-				</div>
-			</div>
+        <div className="Badges__container">
+          <BadgesList badges={props.data} img={logoTwitter} />
+          {props.loading && <MiniLoader />}
+        </div>
+      </div>
     </>
   )
 }
