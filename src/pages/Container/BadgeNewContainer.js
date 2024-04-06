@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import api from '../../api'
 import PageLoading from '../../components/PageLoading'
 import BadgeNew from '../BadgeNew'
+import { useNavigate } from 'react-router-dom';
 
 function BadgeNewContainer(props) {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({
@@ -33,7 +35,7 @@ function BadgeNewContainer(props) {
       await api.badges.create(form)
       setLoading(false)
 
-      props.history.push('/badges')
+      navigate('/badges')
     } catch (error) {
       setLoading(false)
       setError(error)

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import PageLoading from '../../components/PageLoading'
 import PageError from '../../components/PageError'
@@ -6,21 +7,20 @@ import api from '../../api'
 import BadgeDetails from '../BadgeDetails'
 
 function BadgeDetailsContainer(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const badgeId = location.pathname.split('/')[2]
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [data, setData] = useState(undefined)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   const fetchData = async () => {
     setLoading(true)
     setError(null)
 
     try {
-      const data = await api.badges.read(props.match.params.badgeId)
+      const data = await api.badges.read(badgeId)
 
       setLoading(false)
       setData(data)
@@ -29,6 +29,10 @@ function BadgeDetailsContainer(props) {
       setError(error)
     }
   }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   const handleOpenModal = e => {
     setModalIsOpen(true)
@@ -43,13 +47,14 @@ function BadgeDetailsContainer(props) {
     setError(null)
 
     try {
-      await api.badges.remove(props.match.params.badgeId)
+      const res = await api.badges.remove(badgeId)
+      console.log(res)
       setLoading(false)
     } catch (error) {
       setLoading(false)
       setError(error)
     }
-    props.history.push('/badges')
+    navigate('/badges')
   }
 
   if (loading) {

@@ -1,10 +1,11 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import "bootstrap/dist/css/bootstrap.css"
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.css'
 
-import "./global.css"
-import App from "./components/App"
+import './global.css'
+import App from './components/App'
 
-const container = document.getElementById("app")
+const container = document.getElementById('app')
+const Root = createRoot(container)
 
-ReactDOM.render(<App />, container)
+Root.render(<App />)

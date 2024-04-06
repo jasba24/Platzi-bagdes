@@ -64,8 +64,8 @@ function BadgesList(props) {
         {filteredBadges.map((badge) => {
           return (
             <Link
-              to={`/badges/${badge.id}`}
-              key={badge.id}
+              to={`/badges/${badge._id}`}
+              key={badge._id}
               className="list__container text-reset text-decoration-none"
             >
               <div className="list__icon">

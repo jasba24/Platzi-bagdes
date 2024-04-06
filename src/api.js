@@ -1,4 +1,4 @@
-const BASE_URL = 'https://platzi-badges-api.herokuapp.com/api/badges'
+const BASE_URL = 'https://platzi-badges-api-kdhv.onrender.com/api/badges'
 
 async function callApi(endpoint, options) {
   const url = BASE_URL + endpoint
@@ -12,11 +12,11 @@ const api = {
   badges: {
     list() {
       // throw new Error("500: Server Error")
-      return callApi('/')
+      return callApi('/getAll')
     },
     create(badge) {
       // throw new Error("500: Server Error")
-      return callApi('/', {
+      return callApi('/create', {
         method: 'POST',
         mode: 'cors',
         credentials: 'same-origin',

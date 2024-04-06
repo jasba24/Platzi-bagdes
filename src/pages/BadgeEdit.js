@@ -6,7 +6,6 @@ import BadgeForm from '../components/BadgeForm'
 
 function BadgeEdit(props) {
   const { firstName, lastName, jobTitle, twitter, email } = props
-  console.log({ props })
   return (
     <>
       <div className="BadgeEdit__hero">

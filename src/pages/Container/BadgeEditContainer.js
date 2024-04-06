@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import '../styles/BadgeEdit.css'
 import BadgeEdit from '../BadgeEdit'
 import api from '../../api'
 import PageLoading from '../../components/PageLoading'
 
 function BadgeEditContainer(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const badgeId = location.pathname.split('/')[2]
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [form, setForm] = useState({
@@ -15,16 +19,12 @@ function BadgeEditContainer(props) {
     twitter: ''
   })
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
   const fetchData = async e => {
     setLoading(true)
     setError(null)
 
     try {
-      const data = await api.badges.read(props.match.params.badgeId)
+      const data = await api.badges.read(badgeId)
 
       setLoading(false)
       setForm(data)
@@ -33,6 +33,10 @@ function BadgeEditContainer(props) {
       setError(error)
     }
   }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   const handleChange = e => {
     // const nextForm = this.state.form
@@ -49,10 +53,10 @@ function BadgeEditContainer(props) {
     setError(null)
 
     try {
-      await api.badges.update(props.match.params.badgeId, form)
+      await api.badges.update(badgeId, form)
       setLoading(false)
 
-      props.history.push('/badges')
+      navigate("/badges")
     } catch (error) {
       setLoading(false)
       setError(error)
